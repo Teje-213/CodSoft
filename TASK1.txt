@@ -1,5 +1,5 @@
 class ToDoList:
-    def _init_(self):
+    def __init__(self):
         self.tasks = []
 
     def add_task(self, task):
@@ -26,21 +26,32 @@ def main():
 
     while True:
         print("\n1. Add Task\n2. View Tasks\n3. Remove Task\n4. Exit")
-        choice = input("Enter your choice (1/2/3/4): ")
 
-        if choice == '1':
+        # Validate user input with try-except block
+        try:
+            choice = int(input("Enter your choice (1/2/3/4): "))
+        except ValueError:
+            print('Invalid choice. Please choose again.')
+            continue
+
+        if choice == 1:
             task = input("Enter the task: ")
             todo_list.add_task(task)
-        elif choice == '2':
+        elif choice == 2:
             todo_list.view_tasks()
-        elif choice == '3':
-            task_index = int(input("Enter the task index to remove: "))
+        elif choice == 3:
+            # Validate user input for list indices
+            try:
+                task_index = int(input("Enter the task index to remove: "))
+            except ValueError:
+                print('Invalid index. Please choose again.')
+                continue
             todo_list.remove_task(task_index)
-        elif choice == '4':
+        elif choice == 4:
             print('Exiting program. Goodbye!')
             break
         else:
             print('Invalid choice. Please choose again.')
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
